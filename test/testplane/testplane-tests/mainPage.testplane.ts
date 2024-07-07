@@ -1,0 +1,13 @@
+import { bug_id } from "./bug_id";
+
+it("Главная страница правильно отрисована(скриншот)", async ({ browser }) => {
+  await browser.url(
+    "http://localhost:3000/hw/store" + (bug_id ? `?bug_id=${bug_id}` : "")
+  );
+
+  const application = await browser.$(".Application");
+
+  await application.waitForDisplayed();
+
+  await application.assertView("plain", { ignoreDiffPixelCount: "0.1%" });
+});
